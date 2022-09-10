@@ -6,6 +6,7 @@ MARIADB_PORT="8033"
 MARIADB_USER="templateUser"
 MARIADB_PASSWORD="templatePwd"
 MARIADB_ROOT_PASSWORD="templateRootPwd"
+PROJECT_FOLDER=$(pwd)
 
 docker pull mariadb
 
@@ -18,7 +19,8 @@ if [[ $DOCKER_DBCONTAINER_FILTER_STRIMG == *"$MARIADB_NAME"* ]]; then
 else
   echo "Container $MARIADB_NAME is missing!"
   # create container:
-  docker run -p $MARIADB_PORT:3306 --detach --name $MARIADB_NAME --env MARIADB_USER=$MARIADB_USER --env MARIADB_PASSWORD=$MARIADB_PASSWORD --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD mariadb:latest
+  mkdir ../datadir
+  docker run -p $MARIADB_PORT:3306 -v "$PROJECT_FOLDER"/../datadir:/var/lib/mysql --detach --name $MARIADB_NAME --env MARIADB_USER=$MARIADB_USER --env MARIADB_PASSWORD=$MARIADB_PASSWORD --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD mariadb:latest
   docker start $MARIADB_NAME
 fi
 
