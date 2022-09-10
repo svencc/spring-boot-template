@@ -4,6 +4,7 @@ import cc.sven.springboottemplate.property.MessageProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @EnableConfigurationProperties({
@@ -15,7 +16,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        final ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+        context.start();
     }
 
 }

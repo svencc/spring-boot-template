@@ -2,11 +2,13 @@ package cc.sven.springboottemplate.service;
 
 import cc.sven.springboottemplate.dto.HelloMessageDto;
 import cc.sven.springboottemplate.entity.HelloMessage;
+import cc.sven.springboottemplate.event.event.SyncEvent;
 import cc.sven.springboottemplate.property.MessageProperties;
 import cc.sven.springboottemplate.repository.HelloMessageRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,6 +23,8 @@ public class SayHelloService {
     private final HelloMessageRepository helloMessageRepository;
     @NonNull
     private final MessageProperties messageProperties;
+    @NonNull
+    private final ApplicationEventPublisher applicationEventPublisher;
 
 
     @NonNull
@@ -32,6 +36,8 @@ public class SayHelloService {
                 .name(name)
                 .build();
         helloMessageRepository.save(messageToPersist);
+
+        applicationEventPublisher.publishEvent(new SyncEvent());
 
         return HelloMessageDto.builder()
                 .name(name)
