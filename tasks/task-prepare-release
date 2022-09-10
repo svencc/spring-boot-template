@@ -13,7 +13,6 @@ fi
 
 ## validate if we are calling from correct directory
 TASK_DIRECTORY=$(pwd)
-PARENT_ROOT="../*"
 if test -d "$TASK_DIRECTORY/lib"; then
   echo "Calling from correct directory"
   # Add lib to path
@@ -29,31 +28,8 @@ fi
 
 
 
-# DEFINE FUNCTIONS --------------------------------------------------------------------------------------------------- #
-
-#PARAM $1   _directory
-#RETURN     "true" | "false" on stdout
-isBackendProject() {
-  _directory=$1
-  if test -f "$_directory/pom.xml"; then
-    echo true
-  else
-    echo false
-  fi
-}
-
-# END DEFINE FUNCTIONS ------------------------------------------------------------------------------------------- END #
-
-
-
-
-
 # ==> MAIN LOGIC <== #
-for _dir in $PARENT_ROOT; do
-  if [ "$(isBackendProject "$_dir")" = true ]; then
-    echo "Prepare Release: $_dir ..."
-    cd "$_dir"                                                                # Change working dir into project
-    git checkout -b release/"$TARGET_MAJOR_VERSION"."$TARGET_MINOR_VERSION".x     # Create and checkout release/<MAJOR>.MINOR>.X branch
-    setpomversion "$TARGET_MAJOR_VERSION" "$TARGET_MINOR_VERSION" "$TASK_DIRECTORY/$_dir"
-  fi
-done
+echo "Prepare Release ..."
+cd .. # Change working dir into project
+git checkout -b release/"$TARGET_MAJOR_VERSION"."$TARGET_MINOR_VERSION".x     # Create and checkout release/<MAJOR>.MINOR>.X branch
+setpomversion "$TARGET_MAJOR_VERSION" "$TARGET_MINOR_VERSION" "$TASK_DIRECTORY/$_dir"
