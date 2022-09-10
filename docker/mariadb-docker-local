@@ -3,6 +3,7 @@
 # variables
 MARIADB_NAME="springboottemplate-mariadb"
 MARIADB_PORT="8033"
+MARIADB_DATA_DIRECTORY="db-datadir"
 MARIADB_USER="templateUser"
 MARIADB_PASSWORD="templatePwd"
 MARIADB_ROOT_PASSWORD="templateRootPwd"
@@ -19,8 +20,8 @@ if [[ $DOCKER_DBCONTAINER_FILTER_STRIMG == *"$MARIADB_NAME"* ]]; then
 else
   echo "Container $MARIADB_NAME is missing!"
   # create container:
-  mkdir ../datadir
-  docker run -p $MARIADB_PORT:3306 -v "$PROJECT_FOLDER"/../datadir:/var/lib/mysql --detach --name $MARIADB_NAME --env MARIADB_USER=$MARIADB_USER --env MARIADB_PASSWORD=$MARIADB_PASSWORD --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD mariadb:latest
+  mkdir -p "../$MARIADB_DATA_DIRECTORY"
+  docker run -p $MARIADB_PORT:3306 -v "$PROJECT_FOLDER"/../$MARIADB_DATA_DIRECTORY:/var/lib/mysql --detach --name $MARIADB_NAME --env MARIADB_USER=$MARIADB_USER --env MARIADB_PASSWORD=$MARIADB_PASSWORD --env MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD mariadb:latest
   docker start $MARIADB_NAME
 fi
 
@@ -29,3 +30,6 @@ sleep 10
 
 # run mariadb-docker-local cli, connected to running
 docker run --name $MARIADB_NAME-cli -it --rm mariadb mysql -hhost.docker.internal --port=$MARIADB_PORT -uroot -p$MARIADB_ROOT_PASSWORD
+
+# EXECUTE manually ...
+#CREATE DATABASE template_db;

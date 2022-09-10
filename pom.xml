@@ -74,6 +74,11 @@
             <artifactId>flyway-core</artifactId>
             <!-- <version>9.3.0</version>--> <!-- OPTIONAL VERSION; curated by spring boot -->
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+
         <!-- flyway -->
 
     </dependencies>
