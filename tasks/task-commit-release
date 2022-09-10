@@ -1,0 +1,76 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+TARGET_MAJOR_VERSION=$1
+TARGET_MINOR_VERSION=$2
+
+## validate input parameters
+if [ $# -ne 2 ]; then
+  echo "Invalid nr of arguments supplied; Expected <TARGET_MAJOR_VERSION> <TARGET_MINOR_VERSION>"
+  exit 255
+fi
+
+## validate if we are calling from correct directory
+TASK_DIRECTORY=$(pwd)
+PARENT_ROOT="../*"
+if test -d "$TASK_DIRECTORY/lib"; then
+  echo "Calling from correct directory"
+  # Add lib to path
+  export PATH=$PATH:$TASK_DIRECTORY:$TASK_DIRECTORY/lib
+else
+  echo "You didnt call from tasks directory!"
+  exit 255
+fi
+
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# DEFINE FUNCTIONS --------------------------------------------------------------------------------------------------- #
+
+#PARAM $1   _directory
+#RETURN     "true" | "false" on stdout
+isBackendProject() {
+  _directory=$1
+  if test -f "$_directory/pom.xml"; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+#PARAM $1   _branch
+#RETURN     "true" | "false" on stdout
+doesBranchAlreadyExists() {
+  _branch=${1}
+  _exists=$(git show-ref refs/heads/"$_branch")
+
+  if [ -n "$_exists" ]; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+# END DEFINE FUNCTIONS ------------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+for _dir in $PARENT_ROOT; do
+  echo "Commit: $_dir ..."
+
+  _releaseBranchName="release/$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
+  if [ "$(isBackendProject "$_dir")" = true ] && [ "$(doesBranchAlreadyExists "$_releaseBranchName")" ]; then
+    cd "$_dir" # Change working dir into project
+    git commit -a -m release/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
+    git push
+    git tag "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
+    git push origin "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
+  fi
+done

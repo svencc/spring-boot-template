@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+DOCKER_IMAGE_VERSION=$1
+PATH_TO_PROJECT=$2
+
+## validate input parameters
+if [ $# -ne 2 ]
+  then
+    echo "Invalid nr of arguments supplied; Expected <DOCKER_IMAGE_VERSION> <PATH_TO_PROJECT>"
+    exit 255
+fi
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+java -jar "$SCRIPT_DIR/bin/setpomdockerimageversion.jar" "$DOCKER_IMAGE_VERSION" "$PATH_TO_PROJECT"

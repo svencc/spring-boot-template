@@ -1,0 +1,48 @@
+#!/bin/sh
+
+## validate if we are calling from correct directory
+LIB_SOURCE_DIRECTORY="$(pwd)"
+if test -d "$LIB_SOURCE_DIRECTORY/../../lib/src"; then
+  echo "Calling from correct directory"
+else
+  echo "You didnt call from release-tools/lib/src directory!"
+  exit 255
+fi
+
+
+
+
+
+# DEFINE FUNCTIONS --------------------------------------------------------------------------------------------------- #
+
+#PARAM $1   _directory
+#RETURN     "true" | "false" on stdout
+isPOMProject() {
+  _directory=$1
+  if test -f "$_directory/pom.xml"; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+# END DEFINE FUNCTIONS ------------------------------------------------------------------------------------------- END #
+
+
+
+
+# ==> MAIN LOGIC <== #
+for _dir in $LIB_SOURCE_DIRECTORY/*; do
+    if [ "$(isPOMProject "$_dir")" = true ]; then
+      cd "$_dir"
+      mvn package
+
+      _packageTargetName=$(echo "$_dir" | egrep -o "([a-z]*)$")
+      cd "$_dir/target"
+      _artifact=$(ls -p | grep -v /)
+
+      cp "$_artifact" "$LIB_SOURCE_DIRECTORY/../bin/$_packageTargetName.jar"
+    fi
+done
+
+

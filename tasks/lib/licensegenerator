@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+## validate input parameters
+if [ $# -ne 0 ]
+  then
+    echo "Invalid nr of arguments supplied; Expected 0"
+    exit 255
+fi
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+java -jar "$SCRIPT_DIR/bin/licensegenerator.jar"

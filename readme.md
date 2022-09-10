@@ -1,4 +1,6 @@
-My Spring Boot Config Projecct
+My Spring Boot Config Project
+
+Run the script inside docker folder to create docker db container.
 
 Follow this link to get our OpenAPI definition:
 http://localhost:8080/swagger-ui/index.html

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+## validate input parameters
+if [ $# -ne 0 ]; then
+  echo "Invalid nr of arguments supplied; Expected 0 arguments!"
+  exit 255
+fi
+
+## validate if we are calling from correct directory
+TASK_DIRECTORY=$(pwd)
+if test -d "$TASK_DIRECTORY/lib"; then
+  echo "Calling from correct directory"
+  # Add lib to path
+  export PATH=$PATH:$TASK_DIRECTORY:$TASK_DIRECTORY/lib
+else
+  echo "You didnt call from tasks directory!"
+  exit 255
+fi
+
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+echo "Increment POM_VERSION ..."
+cd .. # Change working dir into project
+git checkout develop
+_gitStatus=$?
+if [ $_gitStatus -ne 0 ]; then
+  echo ".. Cannot checkout develop branch!"
+else
+  incrementpomversion "$TASK_DIRECTORY/.."
+fi

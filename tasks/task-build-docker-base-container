@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+DOCKER_VERSION_TAG=$1
+
+## validate input parameters
+if [ $# -ne 1 ]; then
+  echo "Invalid nr of arguments supplied; Expected <DOCKER_VERSION_TAG>"
+  exit 255
+fi
+
+## validate if we are calling from correct directory
+TASK_DIRECTORY=$(pwd)
+PARENT_ROOT="../*"
+if test -d "$TASK_DIRECTORY/lib"; then
+  echo "Calling from correct directory"
+  # Add lib to path
+  export PATH=$PATH:$TASK_DIRECTORY:$TASK_DIRECTORY/lib
+else
+  echo "You didnt call from tasks directory!"
+  exit 255
+fi
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+cd ../docker/base-image
+./buildDockerfile $DOCKER_VERSION_TAG

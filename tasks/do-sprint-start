@@ -1,0 +1,26 @@
+#!/bin/sh
+
+## validate if we are calling from correct directory
+TASK_DIRECTORY=$(pwd)
+if test -d "$TASK_DIRECTORY/lib"; then
+  # Add tasks and lib to path
+  export PATH=$PATH:$TASK_DIRECTORY:$TASK_DIRECTORY/lib
+else
+  echo "You didnt call from tasks directory!"
+  exit 255
+fi
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+task-precheck
+if [ $? -eq 0 ]; then
+  task-increment-versions
+  task-build-docker-base-container $(pomversion "$TASK_DIRECTORY/.." | egrep -o "([0-9.]*)")
+  task-increment-docker-image-versions $(pomversion "$TASK_DIRECTORY/.." | egrep -o "([0-9.]*)")
+  #task-update-dependencies
+else
+  echo "At least one of the project folders does not have a clean git state!"
+fi

@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+## validate input parameters
+if [ $# -ne 0 ]; then
+  echo "Invalid nr of arguments supplied; Expected 0 arguments!"
+  exit 255
+fi
+
+## validate if we are calling from correct directory
+TASK_DIRECTORY=$(pwd)
+PARENT_ROOT="../*"
+if test -d "$TASK_DIRECTORY/lib"; then
+  echo "Calling from correct directory"
+  # Add lib to path
+  export PATH=$PATH:$TASK_DIRECTORY:$TASK_DIRECTORY/lib
+else
+  echo "You didnt call from tasks directory!"
+  exit 255
+fi
+
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# DEFINE FUNCTIONS --------------------------------------------------------------------------------------------------- #
+
+#PARAM $1   _directory
+#RETURN     "true" | "false" on stdout
+isGitProject() {
+  _directory=$1
+  if test -d "$_directory/.git"; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+# END DEFINE FUNCTIONS ------------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+for _dir in $PARENT_ROOT; do
+  if [ "$(isGitProject "$_dir")" = true ]; then
+    echo "Prepare GIT project: $_dir ..."
+    cd "$_dir" # Change working dir into project
+
+    if [ "$_dir" = "../backend-stihl-lasttests" ]; then
+        echo "... skip ../backend-stihl-lasttests"
+    elif [ -z "$(git status --porcelain)" ]; then
+      if [ "$_dir" = "../bs-tsapis-ssc-pdfgenerator" ]; then
+        echo "... switch to master branch"
+        git checkout master
+      else
+        echo "... switch to develop branch"
+        git checkout develop
+      fi
+
+      echo "... update repository"
+      git pull
+    else
+      echo "... ERROR: git repository $_dir is not clean!"
+      exit 255
+    fi
+  fi
+done

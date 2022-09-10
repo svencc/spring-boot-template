@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+DOCKER_VERSION_TAG=$1
+
+## validate input parameters
+if [ $# -ne 1 ]; then
+  echo "Invalid nr of arguments supplied; Expected <DOCKER_VERSION_TAG>"
+  exit 255
+fi
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+NAMESPACE_LOCAL="<namespace-local>"
+REGISTRY_TARGET_URL="<registry-url>"
+IMAGE_NAME="image-name>"
+
+echo docker build -t "$NAMESPACE_LOCAL/$IMAGE_NAME:$DOCKER_VERSION_TAG" .
+echo docker tag "$NAMESPACE_LOCAL/$IMAGE_NAME:$DOCKER_VERSION_TAG" "$REGISTRY_TARGET_URL/$IMAGE_NAME:$DOCKER_VERSION_TAG"
+echo docker push "$REGISTRY_TARGET_URL/$IMAGE_NAME:$DOCKER_VERSION_TAG"
+
+echo "NAMESPACE_LOCAL/IMAGE_NAME:$DOCKER_VERSION_TAG"
+exit 0

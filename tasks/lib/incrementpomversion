@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# DEFINE INPUT PARAMETER --------------------------------------------------------------------------------------------- #
+
+PATH_TO_PROJECT=$1
+
+## validate input parameters
+if [ $# -ne 1 ]
+  then
+    echo "Invalid nr of arguments supplied; Expected <PATH_TO_PROJECT>"
+    exit 255
+fi
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# END DEFINE INPUT PARAMETER ------------------------------------------------------------------------------------- END #
+
+
+
+
+
+# ==> MAIN LOGIC <== #
+_newPom=$(java -jar "$SCRIPT_DIR/bin/incrementpomversion.jar" "$PATH_TO_PROJECT")
+
+echo "$_newPom"
+exit 0
