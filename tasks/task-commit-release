@@ -59,6 +59,7 @@ if [ "$(doesBranchAlreadyExists "$_releaseBranchName")" ]; then
   # handle branch
   git commit -a -m release/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
   git branch --set-upstream "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x" origin/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
+  git push
 
   # handle tag
   git tag "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
