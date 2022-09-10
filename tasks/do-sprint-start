@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
   task-increment-versions
   task-build-docker-base-container $(pomversion "$TASK_DIRECTORY/.." | egrep -o "([0-9.]*)")
   task-increment-docker-image-versions $(pomversion "$TASK_DIRECTORY/.." | egrep -o "([0-9.]*)")
-  #task-update-dependencies
+  task-update-dependencies
 else
   echo "At least one of the project folders does not have a clean git state!"
 fi
