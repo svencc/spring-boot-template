@@ -12,7 +12,6 @@ fi
 
 ## validate if we are calling from correct directory
 TASK_DIRECTORY=$(pwd)
-PARENT_ROOT="../*"
 if test -d "$TASK_DIRECTORY/lib"; then
   echo "Calling from correct directory"
   # Add lib to path

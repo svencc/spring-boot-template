@@ -54,7 +54,7 @@ echo "Commit ..."
 
 _releaseBranchName="release/$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
 if [ "$(doesBranchAlreadyExists "$_releaseBranchName")" ]; then
-  cd "$_dir" # Change working dir into project
+  cd .. # Change working dir into project
   git commit -a -m release/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
   git push
   git tag "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
