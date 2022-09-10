@@ -2,7 +2,7 @@ package cc.sven.springboottemplate.service;
 
 import cc.sven.springboottemplate.dto.HelloMessageDto;
 import cc.sven.springboottemplate.entity.HelloMessage;
-import cc.sven.springboottemplate.property.HelloProperties;
+import cc.sven.springboottemplate.property.MessageProperties;
 import cc.sven.springboottemplate.repository.HelloMessageRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class SayHelloService {
     @NonNull
     private final HelloMessageRepository helloMessageRepository;
     @NonNull
-    private final HelloProperties helloProperties;
+    private final MessageProperties messageProperties;
 
 
     @NonNull
@@ -43,7 +43,7 @@ public class SayHelloService {
         log.info("list HelloMessages");
 
         return helloMessageRepository.findAll().stream()
-                .limit(helloProperties.getMaxListItems())
+                .limit(messageProperties.getMaxListItems())
                 .map(entity -> HelloMessageDto.builder()
                         .name(entity.getName())
                         .created(entity.getCreated())

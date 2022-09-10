@@ -21,4 +21,10 @@ public class MessageFormatUtil {
                 created
         );
     }
+
+    @NonNull
+    public String parseDomain(@NonNull String recipient) {
+        return recipient.toLowerCase().substring(recipient.lastIndexOf("@") + 1);
+    }
+
 }

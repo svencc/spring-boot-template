@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "HelloWorld")
 @RequestMapping("/api/v1")
-public class HelloWorldController {
+public class HelloMessageController {
 
     @NonNull
     private SayHelloService sayHelloService;
