@@ -55,8 +55,12 @@ echo "Commit ..."
 _releaseBranchName="release/$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
 if [ "$(doesBranchAlreadyExists "$_releaseBranchName")" ]; then
   cd .. # Change working dir into project
+
+  # handle branch
   git commit -a -m release/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
-  git push
+  git branch --set-upstream "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x" origin/"$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.x"
+
+  # handle tag
   git tag "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
-  git push -u origin "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
+  git push origin "$TARGET_MAJOR_VERSION.$TARGET_MINOR_VERSION.0"
 fi
