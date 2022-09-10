@@ -32,4 +32,4 @@ fi
 echo "Prepare Release ..."
 cd .. # Change working dir into project
 git checkout -b release/"$TARGET_MAJOR_VERSION"."$TARGET_MINOR_VERSION".x     # Create and checkout release/<MAJOR>.MINOR>.X branch
-setpomversion "$TARGET_MAJOR_VERSION" "$TARGET_MINOR_VERSION" "$TASK_DIRECTORY/$_dir"
+setpomversion "$TARGET_MAJOR_VERSION" "$TARGET_MINOR_VERSION" "$TASK_DIRECTORY/.."
