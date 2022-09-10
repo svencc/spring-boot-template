@@ -1,0 +1,17 @@
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/entity/CustomMessage.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/api/HelloWorldController.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/dto/HelloMessageDto.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/service/SayHelloService.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/Application.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/api/CustomMessageController.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/entity/HelloMessage.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/mapper/SimpleCustomMessageMapper.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/mapper/CustomMessageMapperWithMapstruct.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/exception/HttpUnprocessableEntityException.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/repository/CustomMessageRepository.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/property/HelloProperties.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/exception/GlobalExceptionHandler.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/dto/CustomMessageDto.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/util/MessageFormatUtil.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/repository/HelloMessageRepository.java
+/Users/svencarrillocastillo/Documents/Projekte/spring-boot-template/src/main/java/cc/sven/springboottemplate/service/CustomMessageService.java
