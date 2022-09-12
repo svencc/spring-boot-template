@@ -1,0 +1,20 @@
+#List:
+git tag
+git tag -l "searchQuery"
+
+#Create
+git tag 1.3.0
+
+#Push to remote
+git push <remote> <tag>
+git push origin 1.3.0
+git push origin --tags #pushes all
+
+#Delete
+git tag -d 1.3.0 # delete tag local
+git push --delete origin 1.3.0 #delete tag on remote
+
+
+git tag -d 0.1.0
+git push --delete origin 0.1.0
+git push --delete origin release/0.1.x
