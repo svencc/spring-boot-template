@@ -22,12 +22,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ValidationFailedDto.builder()
-                        .validatedObject(ex.getParameter().getParameterName())
-                        .message(ex.getMessage())
-                        .build()
-                );
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(ValidationFailedDto.builder()
+                    .validatedObject(ex.getParameter().getParameterName())
+                    .message(ex.getMessage())
+                    .build());
     }
 
     @ExceptionHandler(value = {Exception.class})
